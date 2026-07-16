@@ -738,7 +738,7 @@ func (h *Handler) handlePropfind(w http.ResponseWriter, r *http.Request) (status
 		}
 		return http.StatusMethodNotAllowed, err
 	}
-	depth := infiniteDepth
+	depth := 1 //infiniteDepth
 	if hdr := r.Header.Get("Depth"); hdr != "" {
 		depth = parseDepth(hdr)
 		if depth == invalidDepth {
@@ -884,8 +884,8 @@ func parseDepth(s string) int {
 		return 0
 	case "1":
 		return 1
-	case "infinity":
-		return infiniteDepth
+	/*case "infinity":
+		return infiniteDepth*/
 	}
 	return invalidDepth
 }
